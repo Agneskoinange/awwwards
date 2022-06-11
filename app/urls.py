@@ -19,3 +19,6 @@ urlpatterns = [
     path('project/<post>', views.project, name='project'),
     path('search/', views.search_project, name='search'),
 ]
+
+if settings.DEBUG:
+    urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
