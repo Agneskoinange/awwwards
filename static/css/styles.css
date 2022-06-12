@@ -1,0 +1,139 @@
+.hello{
+    color:green;
+}
+#nbar{
+    background-color:black;
+    color:black;
+}
+.login, #site{
+    text-decoration: none;
+    color:white;
+}
+
+.login:hover, #site:hover{
+    text-decoration: none;
+    color:white;
+}
+.brand{
+    font-weight: bolder;
+}
+.account-img {
+    height: 125px;
+    width: 125px;
+}
+.nav-img{
+    height: 30px;
+    width: 30px;
+}
+body{
+    background-color:white;
+}
+#heart{
+    float:right;
+    border: 1px solid black;
+    border-radius: 50%;
+    padding: 6px;
+}
+
+#heart:hover{
+    color:blue;
+    border: 1px solid blue;
+}
+#usern{
+    color: #00bdaa;
+}
+.form-text, .asteriskField{
+    display:none;
+}
+
+.alert{
+    margin:0;
+    padding:0;
+}
+.alert ul li {
+    list-style-type: none;
+    padding:0;
+    margin:0;
+    font-size:12px;
+}
+.overlay{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.bg
+{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin:0px;
+    padding:0px;
+}
+.over{
+    background-color: rgba(0,0,0,0.5);
+
+}
+#design{
+    color:white;
+    border: 3px solid orange;
+    border-radius: 50%;
+    height:90px;
+    width:90px;
+    padding-left:20px;
+    padding-top:20px;
+    margin-right:10px;
+    margin-left:70px;
+}
+.des,.des1,.des2,.des3{
+    color:white;
+    border-radius: 50%;
+    height:78px;
+    width:78px;
+    padding-top:30%;
+    font-size:17px;
+}
+.des{
+    border: 3px solid orange;
+}
+.des1{
+    border: 3px solid brown;
+}
+.des2{
+    border: 3px solid blue;
+}
+.des3{
+    border: 3px solid green;
+}
+.site-link{
+    padding-top:-20px !important;
+
+}
+
+.mi{
+    background-position:center;
+    background-size:cover;
+    background-repeat:no-repeat;
+}
+
+#usable{
+    color:white;
+    border: 3px solid blue;
+    border-radius: 50%;
+    padding-left:20px;
+    padding-top:20px;
+    height:90px;
+    width:90px;
+    margin-right:10px;
+}
+
+#contente{
+    color:white;
+    border: 3px solid green;
+    border-radius: 50%;
+    height:90px;
+    width:90px;
+    padding-left:20px;
+    padding-top:20px;
+    margin-right:20px;
+}
+
