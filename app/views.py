@@ -17,6 +17,7 @@ def index(request):
             post = form.save(commit=False)
             post.user = request.user
             post.save()
+            return render(request, 'index.html', {'form': form})
 
 
     else:

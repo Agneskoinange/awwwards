@@ -9,8 +9,7 @@ router.register('users', views.UserViewSet)
 router.register('posts', views.PostViewSet)
 router.register('profile', views.ProfileViewSet)
 
-app_name = 'app'
-
+app_name='app'
 urlpatterns = [
     path('', views.index, name='index'),
     path('signup/', views.signup, name='signup'),
@@ -22,6 +21,7 @@ urlpatterns = [
     path('profile/<username>/settings', views.edit_profile, name='edit'),
     path('project/<post>', views.project, name='project'),
     path('search/', views.search_project, name='search'),
+    # path('index/', views.index, name='index'),
 ]
 
 if settings.DEBUG:

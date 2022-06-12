@@ -1,7 +1,7 @@
 {% load crispy_forms_tags %}
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar" id="nbar">
     <div class="container">
-        <a class="navbar-brand" href="{% url 'index'%}"> <strong class="mr-4 brand"> Awwwards</strong></a>
+        <a class="navbar-brand" href="{% url 'app:index'%}"> <strong class="mr-4 brand"> Awwwards</strong></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <form class="form-inline" method="get" action="{% url 'search' %}">
+                    <form class="form-inline" method="get" action="{% url 'app:search' %}">
                         {% csrf_token %}
                         <div class="md-form my-0">
                             <input class="form-control mr-sm-2 " type="text" placeholder="Search" name="title" aria-label="Search">
@@ -28,17 +28,17 @@
                                                                             alt="">
                     </a>
                     <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item text-center" href="{% url 'profile' user.username %}">Profile</a>
+                        <a class="dropdown-item text-center" href="{% url 'app:profile' user.username %}">Profile</a>
                         <hr>
-                        <a class="dropdown-item text-center" href="{% url 'edit' user.username  %}"> Edit profile</a>
+                        <a class="dropdown-item text-center" href="{% url 'app:edit' user.username  %}"> Edit profile</a>
                         <hr>
-                        <a href="{% url 'logout' %}" class="text-secondary text-center dropdown-item">Log Out</a>
+                        <a href="{% url 'app:logout' %}" class="text-secondary text-center dropdown-item">Log Out</a>
 
 
                     </div>
                 </li>
                 {% else %}
-                <a href="{% url 'login' %}" class="login btn btn-sm btn-info"> REGISTER/LOGIN </a>
+                <a href="{% url 'app:login' %}" class="login btn btn-sm btn-info"> REGISTER/LOGIN </a>
                 {% endif %}
                 <button class="btn btn-info btn-sm" id="site" data-toggle="modal" data-target=".bd-example-modal-xl">
                     Submit your site
