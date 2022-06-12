@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'registration',
     'rest_framework',
     'pyuploadcare.dj',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
