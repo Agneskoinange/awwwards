@@ -9,6 +9,8 @@ router.register('users', views.UserViewSet)
 router.register('posts', views.PostViewSet)
 router.register('profile', views.ProfileViewSet)
 
+app_name = 'app'
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('signup/', views.signup, name='signup'),
