@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'tinymce',
     'registration',
     'rest_framework',
+    'pyuploadcare.dj',
 ]
 
 MIDDLEWARE = [
@@ -72,7 +73,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'awwards',
+        'NAME': 'awwwards',
         'USER': 'nessie',
         'PASSWORD': 'agnes1234',
     }
@@ -121,3 +122,8 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+UPLOADCARE = {
+    'pub_key': '0cabf90972fb0df60637',
+    'secret': '49f08f82b117e6fa2a27',
+}
