@@ -1,0 +1,26 @@
+{%extends "django_registration/base.html"%}
+{% load static %}
+{%load bootstrap4 %}
+{% block content %}
+<div class="container">
+    <div class="welcome">
+      <div class="signupbox">
+        <div id="signup">
+          <h1>register</h1>
+          <form action="/accounts/register/" method="POST" autocomplete="on">
+            {% csrf_token %}
+            {% bootstrap_form form%}
+            <button class="button submit btn btn-success" type="submit" >Sign Up</button>
+        </form>
+        </div>
+      </div>
+        <h2 class="spacer"></h2>
+        <img class="award" src="{% static 'images/award.png' %}"/>
+        <p class="account"> Already have an account?</p>
+        <a href="/accounts/login/"><button class="button signin btn btn-success">Login</button></a>
+      </div>
+    </div>
+   </div>
+  
+  </div>
+{% endblock %}

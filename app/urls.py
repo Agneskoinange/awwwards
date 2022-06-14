@@ -1,28 +1,30 @@
-from django.urls import path, include
+from app.models import Project
+from django.urls import path,include
 from . import views
-from rest_framework import routers
 from django.conf import settings
 from django.conf.urls.static import static
+from django_registration.backends.one_step.views import RegistrationView
+from django.contrib.auth.views import LogoutView, LoginView
+from django.contrib.auth import views as auth_views
+from rest_framework.authtoken.views import obtain_auth_token
 
-router = routers.DefaultRouter()
-router.register('users', views.UserViewSet)
-router.register('posts', views.PostViewSet)
-router.register('profile', views.ProfileViewSet)
-
-app_name='app'
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('signup/', views.signup, name='signup'),
-    path('account/', include('django.contrib.auth.urls')),
-    path('api/', include(router.urls)),
-    path('<username>/profile', views.user_profile, name='userprofile'),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('profile/<username>/', views.profile, name='profile'),
-    path('profile/<username>/settings', views.edit_profile, name='edit'),
+    path('', views.index, name= 'index'),
+    path('search_projects/', views.search_projects, name='search_results'),
+    path('project/<project_id>', views.display_all_project, name='project'),
+    path('new/project', views.new_project, name='new_project'),
+    path('profile/', views.user_profiles, name='profile'),
+    path('ratings/',include('star_ratings.urls',namespace='ratings')),
+    path('api/project/', views.ProjectList.as_view()),
+    path('api/profile/', views.ProfileList.as_view()),
+    path('accounts/register/', RegistrationView.as_view(success_url='/'),name='django_registration_register'),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('django_registration.backends.one_step.urls')),
+    path('logout/',auth_views.LogoutView.as_view()),
+    path('api-token-auth/', obtain_auth_token),
     path('project/<post>', views.project, name='project'),
-    path('search/', views.search_project, name='search'),
-    # path('index/', views.index, name='index'),
-]
 
+
+]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

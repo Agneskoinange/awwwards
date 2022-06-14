@@ -1,49 +1,64 @@
-{% load crispy_forms_tags %}
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar" id="nbar">
+<nav class="pl-5 pr-5 navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container">
-        <a class="navbar-brand" href="{% url 'app:index'%}"> <strong class="mr-4 brand"> Awwwards</strong></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <form class="form-inline" method="get" action="{% url 'app:search' %}">
-                        {% csrf_token %}
-                        <div class="md-form my-0">
-                            <input class="form-control mr-sm-2 " type="text" placeholder="Search" name="title" aria-label="Search">
-                        </div>
-                    </form>
-                </li>
-            </ul>
+        <a class="navbar-brand font-weight-bold title" href="{% url 'index' %}"style="font: size 20px; font-weigth:bold">Home</a>
+      <!-- Collapse button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <!-- content -->
 
-            <ul class="navbar-nav navbar-right">
-                {% if user.is_authenticated%}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                       aria-haspopup="true"
-                       aria-expanded="false">{{ user.username|title }} <img class="rounded-circle nav-img"
-                                                                            src="{{ user.profile.profile_picture.url }}"
-                                                                            alt="">
-                    </a>
-                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item text-center" href="{% url 'app:profile' user.username %}">Profile</a>
-                        <hr>
-                        <a class="dropdown-item text-center" href="{% url 'app:edit' user.username  %}"> Edit profile</a>
-                        <hr>
-                        <a href="{% url 'app:logout' %}" class="text-secondary text-center dropdown-item">Log Out</a>
-
-
-                    </div>
-                </li>
-                {% else %}
-                <a href="{% url 'app:login' %}" class="login btn btn-sm btn-info"> REGISTER/LOGIN </a>
-                {% endif %}
-                <button class="btn btn-info btn-sm" id="site" data-toggle="modal" data-target=".bd-example-modal-xl">
-                    Submit your site
-                </button>
-            </ul>
+    <div class="collapse navbar-collapse" id="basicExampleNav">
+      <!-- Links -->
+      <ul class="navbar-nav mr-auto">
+          
+          
+        </li>
+        {% if user.is_authenticated %}
+        
+        {% endif %}
+      
+        </ul>
+       {% if user.is_authenticated %} 
+       <form class = "form-inline" action="{% url 'search_results' %}">
+         <div class="input-group-btn">
+           <input type="text" class="form-control" placeholder="Search Project" name="project">
+         <br>
+           <button class="btn btn-light" type="submit"><i class="glyphicon glyphicon-search"></i></button>
         </div>
-    </div>
+      </form>
+      {% endif %}
+      <div class="col-sm-6 col-lg-6 d-flex justify-content-end">
+          {% if user.is_authenticated %}
+          <ul><li class="nav-item">
+
+            <a class="nav-link btn btn-block text-white success-color-dark" href="{%url 'new_project'%}">SUBMIT YOUR WEBSITE </a>
+          </li></ul>
+        <ul>
+          <li class="dropdown list-unstyled text-white">
+              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-user" style="color: rgb(238, 229, 229);"></i> My Account </a>
+            <ul class="dropdown-menu dropdown-default" role="menu">
+              <li>
+                  <a class="dropdown-item" href="{%url 'profile'%}">Profile</a>
+                </li>
+
+              <li>
+                <a class="dropdown-item" href="/logout/">Logout</a>
+              </li>
+            </li>
+            </ul>
+        </ul>
+        {% else %}
+        <li class="list-unstyled">
+            <a class='btn btn-outline-light font-weight-bold' href="/accounts/login/" style="font-size: 15px;">Login</a>
+            <a class='btn btn-outline-warning font-weight-bold' href="/accounts/register/"style="font-size: 15px;">Sign Up</a>
+        </li>
+
+        {% endif %}
+  </div>
+
+</div>
+<!-- Collapsible content -->
 </nav>

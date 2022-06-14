@@ -1,10 +1,11 @@
 from django.test import TestCase
-from .models import *
+from .models import Project, Profile, Vote
+from django.contrib.auth.models import User
 
+class ProfileTestClass(TestCase):
 
-class TestProfile(TestCase):
     def setUp(self):
-        self.user = User(id=1, username='jymal', password='K8ddj6m2l')
+        self.user = User(id=1, username='nessie', password='agnes1234')
         self.user.save()
 
     def test_instance(self):
@@ -16,53 +17,44 @@ class TestProfile(TestCase):
     def test_delete_user(self):
         self.user.delete()
 
-
-class PostTest(TestCase):
+class VoteTestClass(TestCase):
     def setUp(self):
-        self.user = User.objects.create(id=1, username='jymal')
-        self.post = Post.objects.create(id=1, title='test post', photo='https://ucarecdn.com/0ccf61ff-508e-46c6-b713-db51daa6626e', description='desc',
-                                        user=self.user, url='http://ur.coml')
+        self.nessie = User(username = "nessie", email = "agnesprojectsemail@gmail.com",password = "agnes1234")
+        self.profile = Profile(user= self.agnes, prof_pic='png',bio='bio', email='agnesprojectsemail@gmail.com"', link='www.profile.com')
+        self.project = Project(author= "nessie", project_title= "test", project_image = "imageurl", project_description ="test project", link = "testlink")
+        self.vote = Vote(voter=self.profile, project=self.project, usability= 4, design= 7, content = 3)
+
+        self.nessie.save()
+        self.profile.save_profile()
+        self.project.save_project()
+        self.vote.save_vote()
+
+    def tearDown(self):
+        Profile.objects.all().delete()
+        User.objects.all().delete()
+        Project.objects.all().delete()
+        Vote.objects.all().delete()
 
     def test_instance(self):
-        self.assertTrue(isinstance(self.post, Post))
+        self.assertTrue(isinstance(self.vote, Vote))
 
-    def test_save_post(self):
-        self.post.save_post()
-        post = Post.objects.all()
-        self.assertTrue(len(post) > 0)
+    def test_save_vote(self):
+        votes = Vote.objects.all()
+        self.assertTrue(len(votes)> 0)
 
-    def test_get_posts(self):
-        self.post.save()
-        posts = Post.all_posts()
-        self.assertTrue(len(posts) > 0)
+    def test_delete_vote(self):
+        votes1 = Vote.objects.all()
+        self.assertEqual(len(votes1),1)
+        self.vote.delete_vote()
+        votes2 = Vote.objects.all()
+        self.assertEqual(len(votes2),0)
 
-    def test_search_post(self):
-        self.post.save()
-        post = Post.search_project('test')
-        self.assertTrue(len(post) > 0)
+    def test_get_project_voters(self):
+        voters = Vote.get_project_voters(self.profile)
+        self.assertEqual(voters[0].voter.user.username, 'agnes')
+        self.assertEqual(len(voters), 1)
 
-    def test_delete_post(self):
-        self.post.delete_post()
-        post = Post.search_project('test')
-        self.assertTrue(len(post) < 1)
-
-
-class RatingTest(TestCase):
-    def setUp(self):
-        self.user = User.objects.create(id=1, username='jymal')
-        self.post = Post.objects.create(id=1, title='test post', photo='https://ucarecdn.com/0ccf61ff-508e-46c6-b713-db51daa6626e', description='desc',
-                                        user=self.user, url='http://ur.coml')
-        self.rating = Rating.objects.create(id=1, design=6, usability=7, content=9, user=self.user, post=self.post)
-
-    def test_instance(self):
-        self.assertTrue(isinstance(self.rating, Rating))
-
-    def test_save_rating(self):
-        self.rating.save_rating()
-        rating = Rating.objects.all()
-        self.assertTrue(len(rating) > 0)
-
-    def test_get_post_rating(self, id):
-        self.rating.save()
-        rating = Rating.get_ratings(post_id=id)
-        self.assertTrue(len(rating) == 1)
+    def test_get_project_votes(self):
+        votes = Vote.get_project_votes(self.project)
+        self.assertEqual(votes[0].design, 7)
+        self.assertEqual(len(votes), 1)

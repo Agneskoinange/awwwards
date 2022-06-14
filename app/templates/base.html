@@ -1,42 +1,76 @@
 {% load static %}
-<html lang="en">
-<head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144351462-1"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-144351462-1');
-    </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" type="image/png" href="{% static '/images/favicon.ico' %}">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <title>Awwwards</title>
-     {{ form.media }}
-</head>
-<body>
-{% include 'navbar.html' %}
-{% block content %}
 
-{% endblock %}
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/js/mdb.min.js"></script>
-<script src="https://assets.awwwards.com/dist/js/vendor.13df77655f5689a9b532.js" defer></script>
-<script src="https://assets.awwwards.com/dist/js/home.2734a967c43d3d4952c9.js" defer></script>
-<script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
-            <script>
-        if('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js');
-            });
-        }
-            </script>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+
+  {% if title %}
+  <title>Awwards {{title}}</title>
+  {% else %}
+    <title> Awwards </title>
+  {% endif %}
+ 
+  {% block styles %}
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+  {% endblock %}
+  <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+
+</head>
+
+<body class="grey lighten-5">
+    {% include "navbar.html" %}
+
+    {% block content %} 
+    <div class="jumbotron jumbotron-fluid bg-light mb-1 pb-3 pt-3">
+        <div class="">
+          <h2 class="display-5 text-center font-weight-bold text-white">Welcome to Awwards</h2>
+        </div>
+      </div>
+    
+    {%endblock%}
+
+    {% block scripts %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+     <!-- JQuery -->
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <!-- Bootstrap tooltips -->
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+      <!-- Bootstrap core JavaScript -->
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+      <!-- MDB core JavaScript -->
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/js/mdb.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
+      <script type="text/javascript" src="{% static 'script.js' %}"></script>
+
+    {% endblock %}
+
+    <div class="mb-4 pb-4"></div>
+   <!-- Footer -->
+   <footer class="page-footer font-small special-color-dark pt-4">
+
+    <!-- Footer Elements -->
+    <div class="container">
+    <div class="footer-copyright text-center py-3">© 2021 Copyright:
+    <a href="https://github.com/agneskoinange/Awwwards">Agnes Koinage</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
 </body>
+
 </html>

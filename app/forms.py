@@ -1,41 +1,23 @@
+from .models import Profile, Project, Vote
+from django.forms import ModelForm, widgets
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from .models import Post, Profile, Rating
-from pyuploadcare.dj.forms import ImageField
-
-
-class SignupForm(UserCreationForm):
-    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
-
-    class Meta:
-        model = User
-        fields = ('username', 'email', 'password1', 'password2')
-
-
-class PostForm(forms.ModelForm):
-    photo = ImageField(label='')
-
-    class Meta:
-        model = Post
-        fields = ('photo', 'title', 'url', 'description', 'technologies',)
-
-
-class UpdateUserForm(forms.ModelForm):
-    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
-
-    class Meta:
-        model = User
-        fields = ('username', 'email')
-
-
-class UpdateUserProfileForm(forms.ModelForm):
+class CreateProfileForm(ModelForm):
     class Meta:
         model = Profile
-        fields = ['name', 'location', 'profile_picture', 'bio', 'contact']
+        exclude = ['user',]
+        widgets = {
+            'bio': forms.Textarea(attrs={'rows':2, 'cols':10,}),
+        }
 
-
-class RatingsForm(forms.ModelForm):
+class NewProjectForm(ModelForm):
     class Meta:
-        model = Rating
-        fields = ['design', 'usability', 'content']
+        model = Project
+        exclude = [ 'pub_date', 'author']
+        widgets = {
+          'project_description': forms.Textarea(attrs={'rows':4, 'cols':10,}),
+        } 
+
+class RatingProjectForm(ModelForm):
+    class Meta:
+        model = Vote
+        exclude = ['pub_date', 'voter', 'project']

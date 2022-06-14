@@ -1,5 +1,9 @@
 import os
 from pathlib import Path
+import dj_database_url
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,12 +31,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
-    'bootstrap3',
-    # 'tinymce',
-    # 'registration',
+    # 'bootstrap3',
+    # 'bootstrap4',
+    'tinymce',
+    'registration',
+    'star_ratings',
+    'rest_framework.authtoken',
     'rest_framework',
-    'pyuploadcare.dj',
-    'crispy_forms',
+    # 'pyuploadcare.dj',
+    # 'crispy_forms',
+    
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -49,6 +57,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'project.urls'
+
+WHITENOISE_AUTOREFRESH = True
 
 TEMPLATES = [
     {
@@ -75,10 +85,11 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'awwwards',
         'USER': 'nessie',
         'PASSWORD': 'agnes1234',
+        'PORT': '',
     }
 }
 
@@ -117,30 +128,53 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
+
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-LOGIN_REDIRECT_URL = 'index'
-
-LOGOUT_REDIRECT_URL = 'index'
 
 UPLOADCARE = {
     'pub_key': '0cabf90972fb0df60637',
     'secret': '49f08f82b117e6fa2a27',
 }
 
+WHITENOISE_AUTOREFRESH = True
 
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ],
-    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning'
-}
+# cloudinary.config( 
+#   cloud_name = "dopvdc9a1", 
+#   api_key = "392671715629863", 
+#   api_secret = "arHv5ZYdNf0Z8biPJ7gCSuHKXxU" 
+# )
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_PERMISSION_CLASSES': [
+#         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+#     ],
+#     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning'
+# }
+
+LOGIN_URL = "/accounts/login/"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL="/accounts/login/"
+
+REGISTRATION_OPEN= True
+
+# Email configurations remember to install python-decouple
+# EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+# EMAIL_HOST = config('EMAIL_HOST')
+# EMAIL_PORT = config('EMAIL_PORT')
+# EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')

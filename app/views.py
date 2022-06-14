@@ -1,99 +1,103 @@
+from django.http.response import Http404, HttpResponseRedirect
+from app.forms import CreateProfileForm, NewProjectForm, RatingProjectForm
+from django.shortcuts import render, redirect
+import datetime as dt
+from .models import Profile, Project, Vote
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, get_object_or_404
-from .forms import SignupForm, PostForm, UpdateUserForm, UpdateUserProfileForm, RatingsForm
-from rest_framework import viewsets
-from .models import Profile, Post, Rating
-from .serializers import ProfileSerializer, UserSerializer, PostSerializer
-from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect
-import random
+from django.urls import reverse
+from django.core.exceptions import ObjectDoesNotExist
+from django.conf import settings
+from .serializer import ProfileSerializer, ProjectSerializer
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from app import serializer
 
-
+# Create your views here.
 def index(request):
-    if request.method == "POST":
-        form = PostForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.user = request.user
-            post.save()
-            return render(request, 'index.html', {'form': form})
+    date = dt.date.today()
+    projects = Project.display_all_projects()
+
+    return render(request, 'index.html', {"date": date, "projects":projects})
 
 
+@login_required(login_url='/accounts/login/')
+def search_projects(request):
+    if 'keyword' in request.GET and request.GET["keyword"]:
+        search_term = request.GET.get("keyword")
+        searched_projects = Project.search_project(search_term)
+        message = f"{search_term}"
+        return render(request, 'search.html', {"message":message,"projects": searched_projects})
     else:
-        form = PostForm()
-    posts = Post.objects.all()
-    return render(request, 'index.html', {'form': form,'posts': posts})
+        message = 'You have not searched for anything'
+        return render(request, 'search.html', {'message': message})
 
+def display_all_project(request, project_id):
+    try:
+        project = Project.objects.get(pk = project_id)
+    except ObjectDoesNotExist:
+        raise Http404()
+    return render(request, "project.html", {"project":project})
+  
 
-class ProfileViewSet(viewsets.ModelViewSet):
-    queryset = Profile.objects.all()
-    serializer_class = ProfileSerializer
-
-
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-
-class PostViewSet(viewsets.ModelViewSet):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
-
-
-def signup(request):
+@login_required(login_url='/accounts/login/')
+def new_project(request):
+    current_user = request.user
     if request.method == 'POST':
-        form = SignupForm(request.POST)
+        form = NewProjectForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('index')
+            project = form.save(commit=False)
+            project.Author = current_user
+            project.save()
+        return redirect('index')
+
     else:
-        form = SignupForm()
-    return render(request, 'registration/signup.html', {'form': form})
+        form = NewProjectForm()
+    return render(request, 'add_new_project.html', {"form": form})
 
 
-@login_required(login_url='login')
-def profile(request, username):
-    return render(request, 'profile.html')
+@login_required(login_url='/accounts/login/')
+def user_profiles(request):
+    current_user = request.user
+    author = current_user
+    projects = Project.get_by_author(author)
 
-
-def user_profile(request, username):
-    user_prof = get_object_or_404(User, username=username)
-    if request.user == user_prof:
-        return redirect('profile', username=request.user.username)
-    params = {
-        'user_prof': user_prof,
-    }
-    return render(request, 'userprofile.html', params)
-
-
-@login_required(login_url='login')
-def edit_profile(request, username):
-    user = User.objects.get(username=username)
+    
     if request.method == 'POST':
-        user_form = UpdateUserForm(request.POST, instance=request.user)
-        prof_form = UpdateUserProfileForm(request.POST, request.FILES, instance=request.user.profile)
-        if user_form.is_valid() and prof_form.is_valid():
-            user_form.save()
-            prof_form.save()
-            return redirect('profile', user.username)
+        form = CreateProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.save()
+        return redirect('profile')
+        
     else:
-        user_form = UpdateUserForm(instance=request.user)
-        prof_form = UpdateUserProfileForm(instance=request.user.profile)
-    params = {
-        'user_form': user_form,
-        'prof_form': prof_form
-    }
-    return render(request, 'edit.html', params)
+        form = CreateProfileForm()
+    
+    return render(request, 'profile.html', {"form":form, "projects":projects})
 
+class ProjectList(APIView):
+    def get(self, request, format=None):
+        all_project = Project.objects.all()
+        serializers = ProjectSerializer(all_project, many=True)
+        return Response(serializers.data)
+
+class ProfileList(APIView):
+    def get(self, request, format=None):
+        all_profile = Profile.objects.all()
+        serializers = ProfileSerializer(all_profile, many=True)
+        print(serializers.data)
+        return Response(serializers.data)
+
+    def post(self, request, format=None):
+        serializers = ProfileSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data)
+        return Response(serializers.errors)
 
 @login_required(login_url='login')
 def project(request, post):
-    post = Post.objects.get(id=post)
+    post = Post.objects.get(title=post)
     ratings = Rating.objects.filter(user=request.user, post=post).first()
     rating_status = None
     if ratings is None:
@@ -135,19 +139,3 @@ def project(request, post):
 
     }
     return render(request, 'project.html', params)
-
-
-def search_project(request):
-    if request.method == 'GET':
-        title = request.GET.get("title")
-        results = Post.objects.filter(title__icontains=title).all()
-        print(results)
-        message = f'name'
-        params = {
-            'results': results,
-            'message': message
-        }
-        return render(request, 'results.html', params)
-    else:
-        message = "You haven't searched for any image category"
-    return render(request, 'results.html', {'message': message})
