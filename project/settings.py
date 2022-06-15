@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',
     # 'bootstrap3',
-    # 'bootstrap4',
+    'bootstrap4',
     'tinymce',
     'registration',
     'star_ratings',
@@ -153,11 +153,11 @@ UPLOADCARE = {
 
 WHITENOISE_AUTOREFRESH = True
 
-# cloudinary.config( 
-#   cloud_name = "dopvdc9a1", 
-#   api_key = "392671715629863", 
-#   api_secret = "arHv5ZYdNf0Z8biPJ7gCSuHKXxU" 
-# )
+cloudinary.config( 
+  cloud_name = "dopvdc9a1", 
+  api_key = "392671715629863", 
+  api_secret = "arHv5ZYdNf0Z8biPJ7gCSuHKXxU" 
+)
 
 # REST_FRAMEWORK = {
 #     'DEFAULT_PERMISSION_CLASSES': [

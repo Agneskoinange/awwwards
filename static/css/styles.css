@@ -1,19 +1,18 @@
-h1 {
+ h1 {
     color: black;
 }
 
-html,
+/* html,
 body {
     position: relative;
     min-height: 100%;
 }
+ */
 
 
-/* // Within style tags in your html file */
-
-* {
+/* * {
     box-sizing: border-box;
-}
+} */
 
 .grid:after {
     content: '';
@@ -40,7 +39,7 @@ body {
     }
 }
 
-.grid-item {
+/* .grid-item {
     float: left;
 }
 
@@ -160,4 +159,4 @@ label {
     outline: none !important;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
-}
+} */

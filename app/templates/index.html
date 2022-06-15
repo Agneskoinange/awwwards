@@ -1,6 +1,26 @@
+<div id="header-top">
+  <div class="box-left">
+      <div class="item">
+      <span class="h6 mb-o">
+          <div id="english" class="text-muted"><u>ENGLISH</u></div>
+      </span>
+      </div>
+  </div>
+  <div class="box-center">
+      <p class="slogan">The awards of design, creativity and innovation on the internet</p>
+  </div>
+  <div class="box-right">
+      <span class="pull-right icons">
+      <i class="fa fa-instagram" aria-hidden="true"></i>
+      <i class="fa fa-twitter" aria-hidden="true"></i>
+      <i class="fa fa-facebook" aria-hidden="true"></i>
+  </span>
+  </div>
+</div>
+
 {%extends 'base.html'%}
 {% block content %}
-<div style="background:url('https://images.pexels.com/photos/6370110/pexels-photo-6370110.jpeg?cs=srgb&dl=pexels-anna-tarazevich-6370110.jpg&fm=jpg'); height: 70vh; background-size: cover; background-position: center;"> 
+<div style="background:url('https://images.unsplash.com/photo-1521489871110-81dc5a61dbda?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80'); height: 70vh; background-size: cover; background-position: center;"> 
     <div id="intro">
         
         <div class="mask rgba-black-strong" style="height: 70vh;">
@@ -11,9 +31,8 @@
   
                     <div class="col-lg-12 pt-5 mt-5">
   
-                        <!-- Heading -->
-                        <h3 class="display-4 font-weight-bold white-text pt-5">a<span>WWW</span>ards</h3>
-                       
+                      <h3 class="display-4 font-weight-bold white-text pt-5">Random Posts</h3>
+                                              
                     </div>
   
                 </div>
@@ -30,7 +49,7 @@
   
   <!-- end of landing layout -->
   <div class="container-fluid">
-    <div style="background:url('https://images.pexels.com/photos/3694711/pexels-photo-3694711.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500')"> 
+    <div style="background:url('https://images.unsplash.com/photo-1558865869-c93f6f8482af?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=581&q=80')"> 
 
     <div class="mb-2 pb-2 pl-4 pr-2 ml-4 mr-1">
         <label><strong>Site of the day <span>{{date}}</span></strong>
@@ -39,7 +58,7 @@
 
     <div class="row pl-2 pr-2 ml-1 mr-1">
         {% for project_item in projects %}
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 <div class="card-deck">
                 
                     <div class="card mb-2 mt-2">
@@ -66,7 +85,7 @@
                         </div>
                       </div>
                       <div class="card-footer">
-                        By:{{project_item.author.username|upper}} </small>
+                        By:{{project_item.author.username|title}} </small>
                       </div>
                     </div>
                   

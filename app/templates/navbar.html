@@ -1,6 +1,6 @@
 <nav class="pl-5 pr-5 navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container">
-        <a class="navbar-brand font-weight-bold title" href="{% url 'index' %}"style="font: size 20px; font-weigth:bold">Home</a>
+        <a class="navbar-brand font-weight-bold title" href="{% url 'index' %}"style="font: size 20px; font-weigth:bold">awwwards.</a>
       <!-- Collapse button -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
     aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,7 +34,7 @@
 
             <a class="nav-link btn btn-block text-white success-color-dark" href="{%url 'new_project'%}">SUBMIT YOUR WEBSITE </a>
           </li></ul>
-        <ul>
+        <div>
           <li class="dropdown list-unstyled text-white">
               <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
@@ -52,9 +52,14 @@
         </ul>
         {% else %}
         <li class="list-unstyled">
-            <a class='btn btn-outline-light font-weight-bold' href="/accounts/login/" style="font-size: 15px;">Login</a>
-            <a class='btn btn-outline-warning font-weight-bold' href="/accounts/register/"style="font-size: 15px;">Sign Up</a>
+            <a class='btn btn-outline-light font-weight-bold' href="/accounts/login/" style="font-size: 15px;">REGISTER/LOGIN</a>
+            <!-- <a class='btn btn-outline-warning font-weight-bold' href="/accounts/register/"style="font-size: 15px;">Sign Up</a> -->
+            <!-- <a class="nav-link btn btn-block text-white success-color-dark" href="{%url 'new_project'%}">SUBMIT YOUR WEBSITE </a> -->
         </li>
+        <ul><li class="nav-item">
+
+          <a class="nav-link btn btn-block text-white success-color-dark" href="{%url 'new_project'%}">SUBMIT YOUR WEBSITE </a>
+        </li></ul>
 
         {% endif %}
   </div>
