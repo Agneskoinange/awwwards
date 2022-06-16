@@ -1,6 +1,6 @@
-<nav class="pl-5 pr-5 navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-    <div class="container">
-        <a class="navbar-brand font-weight-bold title" href="{% url 'index' %}"style="font: size 20px; font-weigth:bold">awwwards.</a>
+<nav class="  pl-5 pr-5 navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container-fluid">
+        <a class="offset-3 navbar-brand font-weight-bold title" href="{% url 'index' %}"style="font: size 20px; font-weigth:bold">awwwards.</a>
       <!-- Collapse button -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
     aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,8 +23,7 @@
        <form class = "form-inline" action="{% url 'search_results' %}">
          <div class="input-group-btn">
            <input type="text" class="form-control" placeholder="Search Project" name="project">
-         <br>
-           <button class="btn btn-light" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+           <button class="btn btn-light" type="submit"><i class="glyphicon glyphicon-search"></i>Find</button>
         </div>
       </form>
       {% endif %}
@@ -33,7 +32,9 @@
           <ul><li class="nav-item">
 
             <a class="nav-link btn btn-block text-white success-color-dark" href="{%url 'new_project'%}">SUBMIT YOUR WEBSITE </a>
-          </li></ul>
+            </li>
+          </ul>
+          
         <div>
           <li class="dropdown list-unstyled text-white">
               <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
