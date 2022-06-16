@@ -7,14 +7,9 @@
 <div class="container">
   <div class="row mt-4"></div>
   <div class="row">
-
-    <!-- Grid column -->
-    <div class="col-lg-12">
-
-      <!-- Card -->
+      <div class="col-lg-12">
+      
       <div class="card card-cascade wider reverse">
-
-        <!-- Card image -->
         <div class="view view-cascade overlay">
           {% if project.project_image %}
           <img class="card-img-top" src="{{project.project_image.url}}" alt="{{ project.project_name }}"
@@ -31,51 +26,37 @@
             </div>
           </a>
         </div>
-
-        <!-- Card content -->
         <div class="card-body card-body-cascade text-center">
 
-          <!-- Title -->
           <h2 class="font-weight-bold"><a>{{ project.project_title }}</a></h2>
-          <!-- Data -->
-          <h4 class="">{{ project.project_description }}</h4>
-
+            <h4 class="">{{ project.project_description }}</h4>
           <div>
             <a href="{{project.link}}" target="_blank" title="Visit site">
               <button type="button" class="btn btn-default font-weight-bold px-3">Visit website</button></a>
           </div>
-         <div class="mt-2 pt-2">
+          <div class="mt-2 pt-2">
               <h4>Vote on the following:</h4>
-        </div> 
+          </div> 
         <div class="container.col-md-12">
 
             <!-- DESIGN -->
           <h4>Design</h4>
-          {%ratings project %}
-<br>
-          
-          <!-- USABILITY -->
+          {%ratings project %}<br>
           <h4> Usability</h4>
-          {%ratings project %}
-<br>
-          <!-- CONTENT -->
+          {%ratings project %}<br>
           <h4> Content</h4>
-          {%ratings project %}
-</div>
+          {%ratings project %} </div>
             <div class="col-lg-6 dark-text"> <small> Date Posted: {{project.pub_date|date:"d /m/Y"}} </small> </div>
           </div>
           </div>
-          <!-- {{s_start_user}} -->
+          
         </div>
-        <!-- Card content -->
 
       </div>
-      <!-- Card -->
-
-      <!-- Card -->
+     
       <div class="card mt-5 pb-2 mb-2">
 
-        <!-- Card footer -->
+       
         <div class="card-footer bg-white">
           <h5 class="pt-2">Credits</h5>
 
@@ -83,16 +64,16 @@
 
           <small class="font-weight-bold ml-2"><img src="{{ project.profile.photo.url }}" alt=""
               class="rounded-circle img-fluid mr-1" style="width: 50px;">
-            By {{user.username|upper}} 
+            By {{user.username|title}} 
         </div>
 
       </div>
 
     </div>
-    <!-- Grid column -->
+    
 
   </div>
-  <!-- Grid row -->
+  
 
 </div>
 {% endblock %}

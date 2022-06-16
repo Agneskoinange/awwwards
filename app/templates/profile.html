@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="container-fluid mb-4 pb-4" style="height: 100%;">
- <div style="background:url('https://images.pexels.com/photos/3694711/pexels-photo-3694711.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500')"> 
+ <div style="background:url('https://images.unsplash.com/photo-1612538498456-e861df91d4d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'); background-attachment:cover;"> 
 
 
   <div class="row">
@@ -15,7 +15,7 @@
                 {% if user.profile.photo %}
             <img src="{{ user.profile.photo.url }}" alt="" class="d-flex justify-content-t rounded-circle mb-1 img-fluid mr-1" style="width: 150px;">
             {% else %}
-            <img src="https://images.unsplash.com/photo-1626684328484-b34e8a6e56c8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1534&q=80" alt="" class="d-flex justify-content-t rounded-circle mb-1 img-fluid mr-1" style="width: 150px;">
+            <img src="https://images.unsplash.com/photo-1619804751286-7a876a8fd849?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt="" class="d-flex justify-content-t rounded-circle mb-1 img-fluid mr-1" style="width: 150px; height: 150px;">
               {% endif %}
                 <h4> <span class="font-weight-bold"> Username:</span>  {{user.username}} </h4>
         <p> <span class="font-weight-bold"> Email:</span>  {{user.email}} </p>

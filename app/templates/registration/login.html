@@ -10,13 +10,13 @@
           <form action="/accounts/login/" method="POST" class="more-padding" autocomplete="off">
             {% csrf_token %}
             {% bootstrap_form form%}
-            <button class="button submit" type="submit">Login</button>
+            <button class="button submit btn btn-success" type="submit">Login</button>
         </form>
         </div>
       </div>      
         <h2 class="spacer"></h2>
         <p class="account">Don't have an account?</p>
-        <a href="/accounts/register/"><button class="button signup">sign up</button></a>
+        <a href="/accounts/register/"><button class="button signup btn btn-success">sign up</button></a>
       </div>
     </div>
    </div>
