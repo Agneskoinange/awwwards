@@ -33,7 +33,7 @@
                     <div class="card-deck">
                     
                         <div class="card">
-                          <!-- Card image -->
+                          
                         <div class="view overlay zoom">
                             {% if project_item.project_image %}
                             <a href="/project/{{project_item.id}}">
@@ -58,13 +58,13 @@
                           </div>
                           <div class="card-footer">
                             <small class="text-muted ml-2"><img src="{{ project_item.Author.profile.photo.url }}" alt="" class="rounded-circle img-fluid mr-1" style="width: 30px;">
-                            BY {{project_item.Author.first_name|upper}} </small>
+                            By {{project_item.Author.first_name|title}} </small>
                           </div>
                         </div>
                       
                     
                       </div>
-                    <!-- end of card deck  -->
+                    
     
                 </div>
           {% endfor %}
